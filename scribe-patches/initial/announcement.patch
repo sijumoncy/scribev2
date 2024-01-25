@@ -1,0 +1,22 @@
+diff --git a/patches/feat-announcements.patch b/patches/feat-announcements.patch
+index 769d78d..a66d5ee 100644
+--- a/patches/feat-announcements.patch
++++ b/patches/feat-announcements.patch
+@@ -8,7 +8,7 @@ index 8c2aa42..18b0975 100644
+ +			scope: ConfigurationScope.MACHINE,
+ +			type: 'boolean',
+ +			default: true,
+-+			description: localize('workbench.welcomePage.extraAnnouncements', "When enabled, the get started page loads additional announcements from VSCodium's repository.")
+++			description: localize('workbench.welcomePage.extraAnnouncements', "When enabled, the get started page loads additional announcements from Oak's repository.")
+ +		},
+  		'workbench.startupEditor': {
+ diff --git a/src/vs/workbench/contrib/welcomeGettingStarted/browser/gettingStarted.ts b/src/vs/workbench/contrib/welcomeGettingStarted/browser/gettingStarted.ts
+@@ -62,7 +62,7 @@ index 9dd5330..9e2b6a2 100644
+ +		if (this.announcementList) { this.announcementList.dispose(); }
+ +
+ +		const announcementList = this.announcementList = new GettingStartedIndexList({
+-+			title: localize('announcements', "VSCodium Announcements"),
+++			title: localize('announcements', "Oak Announcements"),
+ +			klass: 'announcements',
+ +			limit: 5,
+ +			empty: $('.empty-recent', {}, localize('noAnnouncements', "There are no current announcements.")),

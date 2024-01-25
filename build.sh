@@ -9,6 +9,21 @@ fi
 
 . version.sh
 
+echo before scribe-patch
+# Added from Scribe v2 side
+for file in ./scribe-patches/initial/*.patch; do
+echo "${file}" - test
+  if [[ -f "${file}" ]]; then
+    echo applying scribe initial patch: "${file}";
+    # grep '^+++' "${file}"  | sed -e 's#+++ [ab]/#./vscode/#' | while read line; do shasum -a 256 "${line}"; done
+    if ! git apply --ignore-whitespace "${file}"; then
+      echo failed to apply scribe initial patch "${file}" >&2
+      exit 1
+    fi
+  fi
+done
+echo after scribe-patch
+
 if [[ "${SHOULD_BUILD}" == "yes" ]]; then
   echo "MS_COMMIT=\"${MS_COMMIT}\""
 
