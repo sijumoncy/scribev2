@@ -28,11 +28,11 @@ env:
   VSCODE_QUALITY: stable
 
 jobs:
-  check:
-    runs-on: ubuntu-latest
-    container:
-      image: vscodium/vscodium-linux-build-agent:bionic-x64
-    outputs:
+  check: # job 1
+    runs-on: ubuntu-latest # os 
+    container: # use docker container for this job
+      image: vscodium/vscodium-linux-build-agent:bionic-x64 # specific ubuntu version for build
+    outputs: # pass these var to other jobs ( pass output of one job to coming jobs)
       MS_COMMIT: ${{ env.MS_COMMIT }}
       MS_TAG: ${{ env.MS_TAG }}
       RELEASE_VERSION: ${{ env.RELEASE_VERSION }}
@@ -44,33 +44,33 @@ jobs:
         with:
           ref: ${{ env.GITHUB_BRANCH }}
 
-      - name: Clone VSCode repo
+      - name: Clone VSCode repo # clone latest repo of code
         run: ./get_repo.sh
 
-      - name: Check PR or cron
+      - name: Check PR or cron # identify workflow triggered by a cron or PR
         env:
           TEST_ASSET_BUILDER: ${{ github.event.inputs.test_asset_builder }}
         run: ./check_cron_or_pr.sh
 
   dependencies:
-    needs:
+    needs: # this execute only if previous `check` job success
       - check
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #os 
     env:
-      MS_COMMIT: ${{ needs.check.outputs.MS_COMMIT }}
+      MS_COMMIT: ${{ needs.check.outputs.MS_COMMIT }} # this is the out from previous jobs env
       MS_TAG: ${{ needs.check.outputs.MS_TAG }}
       RELEASE_VERSION: ${{ needs.check.outputs.RELEASE_VERSION }}
     strategy:
-      fail-fast: false
+      fail-fast: false # continue other parallel strategy if one of fails.
       matrix:
         include:
         - vscode_arch: x64
-          image: vscodium/vscodium-linux-build-agent:centos7-devtoolset8-x64
+          image: vscodium/vscodium-linux-build-agent:centos7-devtoolset8-x64 # centof 7 for this arch 64 build
         # - vscode_arch: arm64
         #   image: vscodium/vscodium-linux-build-agent:centos7-devtoolset8-arm64
     container:
       image: ${{ matrix.image }}
-    if: needs.check.outputs.SHOULD_BUILD == 'yes' || needs.check.outputs.SHOULD_DEPLOY == 'yes'
+    if: needs.check.outputs.SHOULD_BUILD == 'yes' || needs.check.outputs.SHOULD_DEPLOY == 'yes' # this set from the check job
 
     steps:
       - uses: actions/checkout@v3
