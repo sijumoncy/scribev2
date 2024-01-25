@@ -1,4 +1,4 @@
-name: stable-linux
+name: stable-linux-scribe
 
 on:
   workflow_dispatch: # manual trigger workflow from actions tab
