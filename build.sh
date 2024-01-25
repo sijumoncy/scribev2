@@ -8,7 +8,6 @@ if [[ -f  "./remote-dependencies.tar" ]]; then
 fi
 
 . version.sh
-
 echo before scribe-patch
 # Added from Scribe v2 side
 for file in ./scribe-patches/initial/*.patch; do
@@ -23,7 +22,6 @@ echo "${file}" - test
   fi
 done
 echo after scribe-patch
-
 if [[ "${SHOULD_BUILD}" == "yes" ]]; then
   echo "MS_COMMIT=\"${MS_COMMIT}\""
 

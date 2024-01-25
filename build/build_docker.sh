@@ -3,7 +3,7 @@
 
 exists() { type -t "$1" &> /dev/null; }
 
-export APP_NAME="Scribe"
+export APP_NAME="Oak"
 export CI_BUILD="no"
 export OS_NAME="linux"
 export SHOULD_BUILD="yes"

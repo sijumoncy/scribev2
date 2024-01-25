@@ -18,57 +18,58 @@ sum_file() {
 mkdir -p assets
 
 if [[ "${OS_NAME}" == "osx" ]]; then
-  if [[ "${CI_BUILD}" != "no" ]]; then
-    cd "VSCode-darwin-${VSCODE_ARCH}"
+  # if [[ "${CI_BUILD}" != "no" ]]; then
+  #   cd "VSCode-darwin-${VSCODE_ARCH}"
+    
+  #   # commented below line - these lines for publishing the app in apple store with their permission
+  #   # CERTIFICATE_P12="${APP_NAME}.p12"
+  #   # KEYCHAIN="${RUNNER_TEMP}/build.keychain"
 
-    CERTIFICATE_P12="${APP_NAME}.p12"
-    KEYCHAIN="${RUNNER_TEMP}/build.keychain"
+  #   # echo "${CERTIFICATE_OSX_P12}" | base64 --decode > "${CERTIFICATE_P12}"
 
-    echo "${CERTIFICATE_OSX_P12}" | base64 --decode > "${CERTIFICATE_P12}"
+  #   # echo "+ create temporary keychain"
+  #   # security create-keychain -p mysecretpassword "${KEYCHAIN}"
+  #   # security set-keychain-settings -lut 21600 "${KEYCHAIN}"
+  #   # security unlock-keychain -p mysecretpassword "${KEYCHAIN}"
+  #   # security list-keychains -s "$(security list-keychains | xargs)" "${KEYCHAIN}"
+  #   # # security list-keychains -d user
+  #   # # security show-keychain-info ${KEYCHAIN}
 
-    echo "+ create temporary keychain"
-    security create-keychain -p mysecretpassword "${KEYCHAIN}"
-    security set-keychain-settings -lut 21600 "${KEYCHAIN}"
-    security unlock-keychain -p mysecretpassword "${KEYCHAIN}"
-    security list-keychains -s "$(security list-keychains | xargs)" "${KEYCHAIN}"
-    # security list-keychains -d user
-    # security show-keychain-info ${KEYCHAIN}
+  #   # echo "+ import certificate to keychain"
+  #   # security import "${CERTIFICATE_P12}" -k "${KEYCHAIN}" -P "${CERTIFICATE_OSX_PASSWORD}" -T /usr/bin/codesign
+  #   # security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k mysecretpassword "${KEYCHAIN}" > /dev/null
+  #   # # security find-identity "${KEYCHAIN}"
 
-    echo "+ import certificate to keychain"
-    security import "${CERTIFICATE_P12}" -k "${KEYCHAIN}" -P "${CERTIFICATE_OSX_PASSWORD}" -T /usr/bin/codesign
-    security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k mysecretpassword "${KEYCHAIN}" > /dev/null
-    # security find-identity "${KEYCHAIN}"
+  #   echo "+ signing"
+  #   if [[ "${VSCODE_QUALITY}" == "insider" ]]; then
+  #     codesign --deep --force --verbose --sign "${CERTIFICATE_OSX_ID}" "${APP_NAME} - Insiders.app"
+  #   else
+  #     codesign --deep --force --verbose --sign "${CERTIFICATE_OSX_ID}" "${APP_NAME}.app"
+  #   fi
 
-    echo "+ signing"
-    if [[ "${VSCODE_QUALITY}" == "insider" ]]; then
-      codesign --deep --force --verbose --sign "${CERTIFICATE_OSX_ID}" "${APP_NAME} - Insiders.app"
-    else
-      codesign --deep --force --verbose --sign "${CERTIFICATE_OSX_ID}" "${APP_NAME}.app"
-    fi
-
-    cd ..
-  fi
-
+  #   cd ..
+  # fi
+echo "+ signing 1"
   if [[ "${SHOULD_BUILD_ZIP}" != "no" ]]; then
     echo "Building and moving ZIP"
     cd "VSCode-darwin-${VSCODE_ARCH}"
     zip -r -X -y "../assets/${APP_NAME}-darwin-${VSCODE_ARCH}-${RELEASE_VERSION}.zip" ./*.app
     cd ..
   fi
-
+echo "+ signing 2"
   if [[ "${SHOULD_BUILD_DMG}" != "no" ]]; then
     echo "Building and moving DMG"
     pushd "VSCode-darwin-${VSCODE_ARCH}"
-    npx create-dmg ./*.app ..
+    npx create-dmg ./*.app .. --identity null
     mv ../*.dmg "../assets/${APP_NAME}.${VSCODE_ARCH}.${RELEASE_VERSION}.dmg"
     popd
   fi
-
+echo "+ signing 3"
   if [[ "${SHOULD_BUILD_SRC}" == "yes" ]]; then
     git archive --format tar.gz --output="./assets/${APP_NAME}-${RELEASE_VERSION}-src.tar.gz" HEAD
     git archive --format zip --output="./assets/${APP_NAME}-${RELEASE_VERSION}-src.zip" HEAD
   fi
-
+echo "+ signing 4"
   VSCODE_PLATFORM="darwin"
 elif [[ "${OS_NAME}" == "windows" ]]; then
   cd vscode || { echo "'vscode' dir not found"; exit 1; }
