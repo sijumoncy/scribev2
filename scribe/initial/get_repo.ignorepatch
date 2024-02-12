@@ -1,0 +1,35 @@
+# as of now we doesn't need this patch because we have planned to keep the same versioning
+diff --git a/get_repo.sh b/get_repo.sh
+index 43af170..439432f 100755
+--- a/get_repo.sh
++++ b/get_repo.sh
+@@ -25,16 +25,16 @@ if [[ -z "${RELEASE_VERSION}" ]]; then
+     fi
+   fi
+ 
+-  date=$( date +%Y%j )
++  date=$(date +%Y.%m.%d)
+ 
+   if [[ "${VSCODE_QUALITY}" == "insider" ]]; then
+-    RELEASE_VERSION="${MS_TAG}.${date: -5}-insider"
++    RELEASE_VERSION="${date}-insider"
+   else
+-    RELEASE_VERSION="${MS_TAG}.${date: -5}"
++    RELEASE_VERSION="${date}"
+   fi
+ else
+   if [[ "${VSCODE_QUALITY}" == "insider" ]]; then
+-    if [[ "${RELEASE_VERSION}" =~ ^([0-9]+\.[0-9]+\.[0-9]+)\.[0-9]+-insider$ ]];
++    if [[ "${RELEASE_VERSION}" =~ ^([0-9]+\.[0-9]+\.[0-9]+)-insider$ ]];
+     then
+       MS_TAG="${BASH_REMATCH[1]}"
+     else
+@@ -42,7 +42,7 @@ else
+       exit 1
+     fi
+   else
+-    if [[ "${RELEASE_VERSION}" =~ ^([0-9]+\.[0-9]+\.[0-9]+)\.[0-9]+$ ]];
++    if [[ "${RELEASE_VERSION}" =~ ^([0-9]+\.[0-9]+\.[0-9]+)$ ]];
+     then
+       MS_TAG="${BASH_REMATCH[1]}"
+     else
