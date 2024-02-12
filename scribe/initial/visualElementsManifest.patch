@@ -1,0 +1,11 @@
+diff --git a/src/stable/resources/win32/VisualElementsManifest.xml b/src/stable/resources/win32/VisualElementsManifest.xml
+index 7e4d6dc..252f22a 100644
+--- a/src/stable/resources/win32/VisualElementsManifest.xml
++++ b/src/stable/resources/win32/VisualElementsManifest.xml
+@@ -5,5 +5,5 @@
+ 				Square150x150Logo="resources\app\resources\win32\code_150x150.png"
+ 				Square70x70Logo="resources\app\resources\win32\code_70x70.png"
+ 				ForegroundText="light"
+-				ShortDisplayName="VSCodium" />
++				ShortDisplayName="Scribe" />
+ </Application>
