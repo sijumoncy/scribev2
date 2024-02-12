@@ -1,5 +1,5 @@
 diff --git a/prepare_vscode.sh b/prepare_vscode.sh
-index 9914681..ca5568f 100755
+index 9914681..ebb0638 100755
 --- a/prepare_vscode.sh
 +++ b/prepare_vscode.sh
 @@ -20,7 +20,7 @@ cd vscode || { echo "'vscode' dir not found"; exit 1; }
@@ -7,8 +7,7 @@ index 9914681..ca5568f 100755
  # apply patches
  { set +x; } 2>/dev/null
 -
-# Avoiding the below line because we are keeping the same version number
-# +mv ../patches/build-version.patch ../patches/build-version.patchIgnore
++# mv ../patches/build-version.patch ../patches/build-version.patchIgnore // Avoiding the below line because we are keeping the same version number
  for file in ../patches/*.patch; do
    if [[ -f "${file}" ]]; then
      echo applying patch: "${file}";
@@ -125,10 +124,10 @@ index 9914681..ca5568f 100755
  # package.json
  cp package.json{,.bak}
  
-# Removing the below lines because we will be using same versioning
-# -setpath "package" "version" "$( echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.([0-9]+)(-insider)?$/\1/p" )"
-# -setpath "package" "release" "$( echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.([0-9]+)(-insider)?$/\2/p" )"
-# +setpath "package" "version" "$( echo "${RELEASE_VERSION}")"
+-setpath "package" "version" "$( echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.([0-9]+)(-insider)?$/\1/p" )"
++ #setpath "package" "version" "$( echo "${RELEASE_VERSION}")" //Removing the below lines because we will be using same versioning
++setpath "package" "version" "$( echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.([0-9]+)(-insider)?$/\1/p" )" 
+ setpath "package" "release" "$( echo "${RELEASE_VERSION}" | sed -n -E "s/^(.*)\.([0-9]+)(-insider)?$/\2/p" )"
  
 -replace 's|Microsoft Corporation|VSCodium|' package.json
 +replace 's|Microsoft Corporation|Scribe|' package.json
