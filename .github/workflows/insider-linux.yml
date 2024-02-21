@@ -6,9 +6,9 @@ on:
       release_version:
         type: string
         description: Forced release version
-      test_asset_builder:
+      generate_assets:
         type: boolean
-        description: Test the assets builder
+        description: Generate assets
   repository_dispatch:
     types: [insider]
   push:
@@ -52,7 +52,7 @@ jobs:
 
       - name: Check PR or cron
         env:
-          TEST_ASSET_BUILDER: ${{ github.event.inputs.test_asset_builder }}
+          GENERATE_ASSETS: ${{ github.event.inputs.generate_assets }}
         run: ./check_cron_or_pr.sh
 
   dependencies:
@@ -114,16 +114,16 @@ jobs:
         include:
         - vscode_arch: x64
           npm_arch: x64
-          image: vscodium/vscodium-linux-build-agent:bionic-x64
+          image: vscodium/vscodium-linux-build-agent:focal-x64
         - vscode_arch: arm64
           npm_arch: arm64
-          image: vscodium/vscodium-linux-build-agent:bionic-arm64
+          image: vscodium/vscodium-linux-build-agent:focal-arm64
         - vscode_arch: armhf
           npm_arch: arm
-          image: vscodium/vscodium-linux-build-agent:bionic-armhf
+          image: vscodium/vscodium-linux-build-agent:focal-armhf
         - vscode_arch: ppc64le
           npm_arch: ppc64
-          image: vscodium/vscodium-linux-build-agent:bionic-ppc64le
+          image: vscodium/vscodium-linux-build-agent:focal-ppc64le
     container:
       image: ${{ matrix.image }}
       env:
@@ -166,7 +166,7 @@ jobs:
 
       - name: Prepare assets
         run: ./prepare_assets.sh
-        if: env.SHOULD_BUILD == 'yes' && (env.SHOULD_DEPLOY == 'yes' || github.event.inputs.test_asset_builder == 'true')
+        if: env.SHOULD_BUILD == 'yes' && (env.SHOULD_DEPLOY == 'yes' || github.event.inputs.generate_assets == 'true')
 
       - name: Release
         env:
