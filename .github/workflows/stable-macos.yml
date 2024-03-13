@@ -21,7 +21,7 @@ on:
     - '**/*.md'
 
 env:
-  APP_NAME: Scribe-Codex
+  APP_NAME: Scribe_Codex
   ASSETS_REPOSITORY: ${{ github.repository }}
   OS_NAME: osx
   VERSIONS_REPOSITORY: ${{ github.repository_owner }}/versions

@@ -5,8 +5,8 @@
 # to run with Bash: "C:\Program Files\Git\bin\bash.exe" ./build/build.sh
 ###
 
-export APP_NAME="Scribe-Codex"
-export BINARY_NAME="scribe-codex"
+export APP_NAME="Scribe_Codex"
+export BINARY_NAME="scribe_codex"
 export CI_BUILD="no"
 export SHOULD_BUILD="yes"
 export SKIP_ASSETS="yes"

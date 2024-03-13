@@ -21,7 +21,7 @@ on:
     - '**/*.md'
 
 env:
-  APP_NAME: Scribe-Codex
+  APP_NAME: Scribe_Codex
   ASSETS_REPOSITORY: ${{ github.repository }}-insiders
   BINARY_NAME: codium-insiders
   DISABLE_UPDATE: 'yes'

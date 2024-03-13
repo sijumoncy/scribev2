@@ -8,16 +8,16 @@ index 95908d1..d4e0bde 100644
  if [[ "${VSCODE_QUALITY}" == "insider" ]]; then
 -  PRODUCT_NAME="VSCodium - Insiders"
 -  PRODUCT_CODE="VSCodiumInsiders"
-+  PRODUCT_NAME="Scribe-Codex - Insiders"
-+  PRODUCT_CODE="Scribe-CodexInsiders"
++  PRODUCT_NAME="Scribe_Codex - Insiders"
++  PRODUCT_CODE="Scribe_CodexInsiders"
    PRODUCT_UPGRADE_CODE="1C9B7195-5A9A-43B3-B4BD-583E20498467"
    ICON_DIR="..\\..\\..\\src\\insider\\resources\\win32"
    SETUP_RESOURCES_DIR=".\\resources\\insider"
  else
 -  PRODUCT_NAME="VSCodium"
 -  PRODUCT_CODE="VSCodium"
-+  PRODUCT_NAME="Scribe-Codex"
-+  PRODUCT_CODE="Scribe-Codex"
++  PRODUCT_NAME="Scribe_Codex"
++  PRODUCT_CODE="Scribe_Codex"
    PRODUCT_UPGRADE_CODE="965370CD-253C-4720-82FC-2E6B02A53808"
    ICON_DIR="..\\..\\..\\src\\stable\\resources\\win32"
    SETUP_RESOURCES_DIR=".\\resources\\stable"
@@ -26,10 +26,10 @@ index 95908d1..d4e0bde 100644
  
  if [[ -z "${1}" ]]; then
 -	OUTPUT_BASE_FILENAME="VSCodium-${VSCODE_ARCH}-${RELEASE_VERSION}"
-+	OUTPUT_BASE_FILENAME="Scribe-Codex-${VSCODE_ARCH}-${RELEASE_VERSION}"
++	OUTPUT_BASE_FILENAME="Scribe_Codex-${VSCODE_ARCH}-${RELEASE_VERSION}"
  else
 -	OUTPUT_BASE_FILENAME="VSCodium-${VSCODE_ARCH}-${1}-${RELEASE_VERSION}"
-+	OUTPUT_BASE_FILENAME="Scribe-Codex-${VSCODE_ARCH}-${1}-${RELEASE_VERSION}"
++	OUTPUT_BASE_FILENAME="Scribe_Codex-${VSCODE_ARCH}-${1}-${RELEASE_VERSION}"
  fi
  
  if [[ "${VSCODE_ARCH}" == "ia32" ]]; then
