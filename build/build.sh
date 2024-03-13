@@ -5,7 +5,8 @@
 # to run with Bash: "C:\Program Files\Git\bin\bash.exe" ./build/build.sh
 ###
 
-export APP_NAME="Scribe"
+export APP_NAME="Scribe-Codex"
+export BINARY_NAME="scribe-codex"
 export CI_BUILD="no"
 export SHOULD_BUILD="yes"
 export SKIP_ASSETS="yes"
@@ -13,10 +14,12 @@ export SKIP_BUILD="no"
 export SKIP_SOURCE="no"
 export VSCODE_LATEST="no"
 export VSCODE_QUALITY="stable"
+export VSCODE_SKIP_NODE_VERSION_CHECK="yes"
 
 while getopts ":ilops" opt; do
   case "$opt" in
     i)
+      export BINARY_NAME="codium-insiders"
       export VSCODE_QUALITY="insider"
       ;;
     l)

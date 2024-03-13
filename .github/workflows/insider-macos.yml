@@ -21,7 +21,7 @@ on:
     - '**/*.md'
 
 env:
-  APP_NAME: Scribe
+  APP_NAME: Scribe-Codex
   ASSETS_REPOSITORY: ${{ github.repository }}-insiders
   GITHUB_BRANCH: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || 'insider' }}
   OS_NAME: osx
@@ -39,7 +39,7 @@ jobs:
         include:
           - runner: macos-12
             vscode_arch: x64
-          - runner: [self-hosted, macOS, ARM64]
+          - runner: macos-14
             vscode_arch: arm64
 
     steps:
@@ -101,6 +101,14 @@ jobs:
           GITHUB_USERNAME: ${{ github.repository_owner }}
         run: ./update_version.sh
         if: env.SHOULD_BUILD == 'yes' && env.SHOULD_DEPLOY == 'yes'
+
+      - name: Upload assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: bin-${{ matrix.vscode_arch }}
+          path: assets/
+          retention-days: 3
+        if: env.SHOULD_BUILD == 'yes' && env.SHOULD_DEPLOY == 'no' && github.event.inputs.generate_assets == 'true'
 
       - name: Clean up keychain
         if: always()

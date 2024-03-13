@@ -125,6 +125,10 @@ elif [[ "${OS_NAME}" == "windows" ]]; then
 else
   cd vscode || { echo "'vscode' dir not found"; exit 1; }
 
+  if [[ "${SHOULD_BUILD_APPIMAGE}" != "no" && "${VSCODE_ARCH}" != "x64" ]]; then
+    SHOULD_BUILD_APPIMAGE="no"
+  fi
+
   if [[ "${SHOULD_BUILD_DEB}" != "no" || "${SHOULD_BUILD_APPIMAGE}" != "no" ]]; then
     yarn gulp "vscode-linux-${VSCODE_ARCH}-build-deb"
   fi
@@ -133,11 +137,19 @@ else
     yarn gulp "vscode-linux-${VSCODE_ARCH}-build-rpm"
   fi
 
-  # if [[ "${SHOULD_BUILD_APPIMAGE}" != "no" ]]; then
-  #   . ../build/linux/appimage/build.sh
-  # fi
+  if [[ "${SHOULD_BUILD_APPIMAGE}" != "no" ]]; then
+    . ../build/linux/appimage/build.sh
+  fi
 
   cd ..
+
+  if [[ "${CI_BUILD}" == "no" ]]; then
+    . ./stores/snapcraft/build.sh
+
+    if [[ "${SKIP_ASSETS}" == "no" ]]; then
+      mv stores/snapcraft/build/*.snap assets/
+    fi
+  fi
 
   if [[ "${SHOULD_BUILD_TAR}" != "no" ]]; then
     echo "Building and moving TAR"
@@ -156,12 +168,12 @@ else
     mv vscode/.build/linux/rpm/*/*.rpm assets/
   fi
 
-  # if [[ "${SHOULD_BUILD_APPIMAGE}" != "no" ]]; then
-  #   echo "Moving AppImage"
-  #   mv build/linux/appimage/out/*.AppImage* assets/
+  if [[ "${SHOULD_BUILD_APPIMAGE}" != "no" ]]; then
+    echo "Moving AppImage"
+    mv build/linux/appimage/out/*.AppImage* assets/
 
-  #   find assets -name '*.AppImage*' -exec bash -c 'mv $0 ${0/_-_/-}' {} \;
-  # fi
+    find assets -name '*.AppImage*' -exec bash -c 'mv $0 ${0/_-_/-}' {} \;
+  fi
 
   VSCODE_PLATFORM="linux"
 fi

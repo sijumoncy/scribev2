@@ -94,45 +94,35 @@ scoop install vscodium
 
 #### <a id="install-with-snap"></a>Install with snap (GNU/Linux)
 
-VSCodium is available in the [Snap Store](https://snapcraft.io/) as [Codium](https://snapcraft.io/codium),
-thanks to the help of the [Snapcrafters](https://github.com/snapcrafters/codium) community.
+VSCodium is available in the [Snap Store](https://snapcraft.io/) as [Codium](https://snapcraft.io/codium), thanks to the help of the [Snapcrafters](https://github.com/snapcrafters/codium) community.
 If your GNU/Linux distribution has support for [snaps](https://snapcraft.io/docs/installing-snapd):
+
 ```bash
 snap install codium --classic
 ```
 
 #### <a id="install-with-package-manager"></a>Install with Package Manager (GNU/Linux)
 
-You can always install using the downloads (deb, rpm, tar) on the releases page for
-[stable](https://github.com/VSCodium/vscodium/releases) or
-[insiders](https://github.com/VSCodium/vscodium-insiders/releases), but you can also
-install using your favorite package manager and get automatic updates.
+You can always install using the downloads (deb, rpm, tar) on the releases page for [stable](https://github.com/VSCodium/vscodium/releases) or [insiders](https://github.com/VSCodium/vscodium-insiders/releases), but you can also install using your favorite package manager and get automatic updates.
 
-[@paulcarroty](https://github.com/paulcarroty) has set up a repository with instructions
-for `apt`, `dnf` and `zypper` [here](https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo).
+[@paulcarroty](https://github.com/paulcarroty) has set up a repository with instructions for `apt`, `dnf` and `zypper` [here](https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo).
 
 Any issues installing VSCodium using your package manager should be directed to that repository's issue tracker.
 
 #### <a id="install-on-arch-linux"></a>Install on Arch Linux
 
-VSCodium is available in [AUR](https://wiki.archlinux.org/index.php/Arch_User_Repository),
-maintained by [@binex-dsk](https://github.com/binex-dsk)
-as package [vscodium-bin](https://aur.archlinux.org/packages/vscodium-bin/) (stable) and
-as [vscodium-insiders-bin](https://aur.archlinux.org/packages/vscodium-insiders-bin).
+VSCodium is available in [AUR](https://wiki.archlinux.org/index.php/Arch_User_Repository), maintained by [@binex-dsk](https://github.com/binex-dsk) as package [vscodium-bin](https://aur.archlinux.org/packages/vscodium-bin/) (stable) and as [vscodium-insiders-bin](https://aur.archlinux.org/packages/vscodium-insiders-bin).
 
-If you want to save disk space by having VSCodium use the Electron system-wide, you also have
-[vscodium-electron](https://aur.archlinux.org/packages/vscodium-electron),
+If you want to save disk space by having VSCodium use the Electron system-wide, you also have [vscodium-electron](https://aur.archlinux.org/packages/vscodium-electron),
 maintained by [@m00nw4tch3r](https://aur.archlinux.org/account/m00nw4tch3r).
 
-An alternative package [vscodium-git](https://aur.archlinux.org/packages/vscodium-git/),
-maintained by [@cedricroijakkers](https://github.com/cedricroijakkers),
-is also available should you wish to compile from source yourself.
+An alternative package [vscodium-git](https://aur.archlinux.org/packages/vscodium-git/), maintained by [@cedricroijakkers](https://github.com/cedricroijakkers), is also available should you wish to compile from source yourself.
 
 #### <a id="flatpak"></a>Flatpak Option (GNU/Linux)
 
-VSCodium is (unofficially) available as a Flatpak app [here](https://flathub.org/apps/details/com.vscodium.codium)
-and the build repo is [here](https://github.com/flathub/com.vscodium.codium).
+VSCodium is available as a Flatpak app [here](https://flathub.org/apps/details/com.vscodium.codium) and the build repo is [here](https://github.com/flathub/com.vscodium.codium).
 If your distribution has support for [flatpak](https://flathub.org), and you have enabled the [flathub repo](https://flatpak.org/setup/):
+
 ```bash
 flatpak install flathub com.vscodium.codium
 flatpak run com.vscodium.codium
@@ -191,22 +181,20 @@ The builds are run every day, but exit early if there isn't a new release from M
 ## <a id="supported-platforms"></a>Supported Platforms
 
 The minimal version is limited by the core component Electron, you may want to check its [platform prerequisites](https://www.electronjs.org/docs/latest/development/build-instructions-gn#platform-prerequisites).
-- [x] macOS (`zip`, `dmg`) OS X 10.10 or newer x64
-- [x] macOS (`zip`, `dmg`) macOS 11.0 or newer arm64
-- [x] GNU/Linux x64 (`deb`, `rpm`, `AppImage`, `tar.gz`)
-- [x] GNU/Linux x86 (`deb`, `rpm`, `tar.gz`) ([up to v1.35.1](https://code.visualstudio.com/updates/v1_36#_linux-32bit-support-ends))
-- [x] GNU/Linux arm64 (`deb`, `tar.gz`)
-- [x] GNU/Linux armhf (`deb`, `tar.gz`)
-- [x] Windows 10 / Server 2012 R2 or newer x64
-- [x] Windows 10 / Server 2012 R2 or newer x86
-- [x] Windows 10 / Server 2012 R2 or newer arm64
 
+- [x] macOS (`zip`, `dmg`) macOS 10.15 or newer x64
+- [x] macOS (`zip`, `dmg`) macOS 11.0 or newer arm64
+- [x] GNU/Linux x64 (`deb`, `rpm`, `AppImage`, `snap`, `tar.gz`)
+- [x] GNU/Linux arm64 (`deb`, `rpm`, `snap`, `tar.gz`)
+- [x] GNU/Linux armhf (`deb`, `rpm`, `tar.gz`)
+- [x] Windows 10 / Server 2012 R2 or newer x64
+- [x] Windows 10 / Server 2012 R2 or newer arm64
 
 ## <a id="donate"></a>Donate
 
-If you would like to support the development of VSCodium, feel free to send BTC to `3PgjE95yzBDTrSPxPiqoxSgZFuKPPAix1N`.
+If you would like to support the development of VSCodium, feel free to send BTC to `3PgjE95yzBDTrSPxPiqoxSgZFuKPPAix1N` (<a href="https://github.com/stripedpajamas" target="_blank">@stripedpajamas</a>).
 
-Special thanks to:
+## <a id="thanks"></a>Special thanks
 
 <table>
   <tr>

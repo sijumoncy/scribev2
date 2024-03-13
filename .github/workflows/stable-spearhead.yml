@@ -9,19 +9,22 @@ on:
       force_dispatch:
         type: boolean
         description: Force dispatch
+      dont_update:
+        type: boolean
+        description: Don't update VSCode
   schedule:
     - cron: '0 18 * * *'
 
 jobs:
   build:
-    runs-on: [self-hosted, macOS, ARM64]
+    runs-on: macos-14
     env:
-      APP_NAME: Scribe
+      APP_NAME: Scribe-Codex
       ASSETS_REPOSITORY: ${{ github.repository }}
       VERSIONS_REPOSITORY: ${{ github.repository_owner }}/versions
       OS_NAME: osx
       VSCODE_ARCH: arm64
-      VSCODE_LATEST: yes
+      VSCODE_LATEST: ${{ github.event.inputs.dont_update == 'true' && 'no' || 'yes' }}
       VSCODE_QUALITY: stable
 
     steps:
@@ -53,7 +56,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.STRONGER_GITHUB_TOKEN }}
           GITHUB_USERNAME: ${{ github.repository_owner }}
-        if: env.SHOULD_BUILD == 'yes'
+        if: env.SHOULD_BUILD == 'yes' && github.event.inputs.dont_update != 'true'
 
       - name: Prepare source
         run: ./prepare_src.sh
@@ -67,7 +70,7 @@ jobs:
         if: env.SHOULD_BUILD == 'yes'
 
       - name: Dispatch builds
-        uses: peter-evans/repository-dispatch@v2
+        uses: peter-evans/repository-dispatch@v3
         with:
           event-type: 'stable'
         if: env.SHOULD_BUILD == 'yes' || github.event.inputs.force_dispatch == 'true'
