@@ -15,7 +15,7 @@ on:
   repository_dispatch:
     types: [stable]
   push:
-    branches: [ master,scribe-master ]
+    branches: [ master,scribe-master, update/1.87.2 ]
     paths-ignore:
     - '**/*.md'
   pull_request:
@@ -24,9 +24,9 @@ on:
     - '**/*.md'
 
 env:
-  APP_NAME: Scribe_Codex
+  APP_NAME: ScribeCodex
   ASSETS_REPOSITORY: ${{ github.repository }}
-  BINARY_NAME: codium
+  BINARY_NAME: ScribeCodex
   DISABLE_UPDATE: 'yes'
   OS_NAME: linux
   VERSIONS_REPOSITORY: ${{ github.repository_owner }}/versions
@@ -183,11 +183,11 @@ jobs:
         run: sudo apt-get install -y libkrb5-dev
         # if: env.SHOULD_BUILD == 'yes'
 
-      - name: Download vscode artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: vscode
-        # if: env.SHOULD_BUILD == 'yes'
+      # - name: Download vscode artifact
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: vscode
+      #   # if: env.SHOULD_BUILD == 'yes'
 
       - name: Build
         env:
@@ -266,11 +266,11 @@ jobs:
           CHECK_ONLY_REH: 'yes'
         run: ./check_tags.sh
 
-      - name: Download vscode artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: vscode
-        if: env.SHOULD_BUILD_REH != 'no' || github.event.inputs.generate_assets == 'true'
+      # - name: Download vscode artifact
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: vscode
+      #   if: env.SHOULD_BUILD_REH != 'no' || github.event.inputs.generate_assets == 'true'
 
       - name: Build
         env:
@@ -336,11 +336,11 @@ jobs:
         run: sudo apt-get install -y libkrb5-dev
         if: env.SHOULD_BUILD == 'yes'
 
-      - name: Download vscode artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: vscode
-        if: env.SHOULD_BUILD_REH != 'no' || github.event.inputs.generate_assets == 'true'
+      # - name: Download vscode artifact
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: vscode
+      #   if: env.SHOULD_BUILD_REH != 'no' || github.event.inputs.generate_assets == 'true'
 
       - name: Build
         env:

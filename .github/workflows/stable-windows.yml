@@ -12,7 +12,7 @@ on:
   repository_dispatch:
     types: [stable]
   push:
-    branches: [ master,scribe-master ]
+    branches: [ master,scribe-master, update/1.87.2 ]
     paths-ignore:
     - '**/*.md'
   pull_request:
@@ -21,7 +21,7 @@ on:
     - '**/*.md'
 
 env:
-  APP_NAME: Scribe_Codex
+  APP_NAME: ScribeCodex
   ASSETS_REPOSITORY: ${{ github.repository }}
   OS_NAME: windows
   VERSIONS_REPOSITORY: ${{ github.repository_owner }}/versions
