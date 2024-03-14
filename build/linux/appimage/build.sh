@@ -4,6 +4,8 @@ set -ex
 
 CALLER_DIR=$( pwd )
 
+echo "caller dir (PWD) ========= : ${CALLER_DIR}"
+
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
 if [[ "${VSCODE_ARCH}" == "x64" ]]; then
