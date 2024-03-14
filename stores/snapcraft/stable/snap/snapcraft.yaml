@@ -1,5 +1,5 @@
-name: scribe_codex
-adopt-info: scribe_codex
+name: scribecodex
+adopt-info: scribecodex
 summary: Code editing. Redefined.
 description: |
   Binary releases of Visual Studio Code without branding/telemetry/licensing
@@ -10,7 +10,7 @@ confinement: classic
 compression: lzo
 
 parts:
-  scribe_codex:
+  scribecodex:
     plugin: nil
     override-build: |
       set -eu
@@ -34,8 +34,8 @@ parts:
       # Update paths
       sed -i 's|Exec=/usr/share/codium/codium|Exec=codium --force-user-env|g' "${SNAPCRAFT_PART_INSTALL}/usr/share/applications/codium.desktop"
       sed -i 's|Exec=/usr/share/codium/codium|Exec=codium --force-user-env|g' "${SNAPCRAFT_PART_INSTALL}/usr/share/applications/codium-url-handler.desktop"
-      sed -i 's|Icon=vscodium|Icon=${SNAP}/meta/gui/codium.png|g' "${SNAPCRAFT_PART_INSTALL}/usr/share/applications/scribe_codex.desktop"
-      sed -i 's|Icon=vscodium|Icon=${SNAP}/meta/gui/codium.png|g' "${SNAPCRAFT_PART_INSTALL}/usr/share/applications/scribe_codex-url-handler.desktop"
+      sed -i 's|Icon=vscodium|Icon=${SNAP}/meta/gui/codium.png|g' "${SNAPCRAFT_PART_INSTALL}/usr/share/applications/scribecodex.desktop"
+      sed -i 's|Icon=vscodium|Icon=${SNAP}/meta/gui/codium.png|g' "${SNAPCRAFT_PART_INSTALL}/usr/share/applications/scribecodex-url-handler.desktop"
     build-packages:
       - wget
       - jq
@@ -88,16 +88,16 @@ parts:
 
   electron-launch:
     after:
-      - scribe_codex
+      - scribecodex
     plugin: dump
     source: snap/local/bin
 
 apps:
-  scribe_codex:
+  scribecodex:
     command: electron-launch $SNAP/usr/share/codium/bin/codium --no-sandbox
-    desktop: usr/share/applications/scribe_codex.desktop
-    common-id: scribe_codex.desktop
+    desktop: usr/share/applications/scribecodex.desktop
+    common-id: scribecodex.desktop
 
   url-handler:
     command: electron-launch $SNAP/usr/share/codium/bin/codium --open-url --no-sandbox
-    desktop: usr/share/applications/scribe_codex-url-handler.desktop
+    desktop: usr/share/applications/scribecodex-url-handler.desktop
