@@ -15,7 +15,7 @@ on:
   repository_dispatch:
     types: [stable]
   push:
-    branches: [ master ]
+    branches: [ master, test/vscodium ]
     paths-ignore:
     - '**/*.md'
   pull_request:
